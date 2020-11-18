@@ -1,0 +1,28 @@
+{
+  "name": "koa-server-net",
+  "version": "1.0.0",
+  "description": "a koa server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mianmalife/koa-server.git"
+  },
+  "keywords": [
+    "koa",
+    "node.js"
+  ],
+  "author": "zhangkx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mianmalife/koa-server/issues"
+  },
+  "homepage": "https://github.com/mianmalife/koa-server#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-router": "^10.0.0",
+    "koa-static": "^5.0.0"
+  }
+}
