@@ -1,4 +1,4 @@
-const static = require('koa-static')
+const staticCache = require('koa-static-cache')
 const path = require('path')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
@@ -27,7 +27,7 @@ app.use(render)
 
 app.use(registerRouter())
 
-app.use(static(path.join(__dirname + '/public')))
+app.use(staticCache(path.join(__dirname, 'public')))
 
 app.listen(8000, () => {
     console.log('server is running')
