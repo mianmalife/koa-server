@@ -1,18 +1,27 @@
 $(function(){
     $('#login').click(function(event){
         event.preventDefault()
-        console.log($('#username').val(), $('#password').val())
-        var username = $('#username').val()
+        var email = $('#email').val()
         var password = $('#password').val()
+        // if (email == '') {
+        //     alert('请输入邮箱!')
+        // } else if (password == '') {
+        //     alert('请输入密码!')
+        // } else {
+
+        // }
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8000/reg',
             data: {
-                username: username,
+                email: email,
                 password: password
             },
             success(res) {
                 console.log(res)
+                if (res.code == 0) {
+                    alert(res.msg)
+                }
             },
             error(err) {
                 console.log(err)
