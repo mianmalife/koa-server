@@ -1,34 +1,30 @@
 const staticCache = require('koa-static-cache')
 const path = require('path')
 const Koa = require('koa')
-const bodyParser = require('koa-bodyparser')
+// const bodyParser = require('koa-bodyparser')
+const convert = require('koa-convert')
 const views = require('koa-views')
 const registerRouter = require('./router')
 const app = new Koa()
-const error = require('koa-json-error')
+const body = require('koa-better-body')
+const config = require('./lib/config')
 
-app.use(bodyParser())
-function formatError(err) {
-    return {
-        // Copy some attributes from
-        // the original error
-        status: err.status,
-        msg: err.message,
- 
-        // ...or add some custom ones
-        success: false,
-        reason: 'Unexpected'
-    }
-}
-app.use(error(formatError))
-const render = views(__dirname + '/view', { map: { html: 'ejs' } })
+app.use(convert(body({
+    uploadDir: config.uploadDir
+})))
+
+app.use(async (ctx, next) => {
+    console.log(ctx.request.fields)
+    await next()
+})
+const render = views(config.templateDir, { map: { html: 'ejs' } })
 
 app.use(render)
 
 app.use(registerRouter())
 
-app.use(staticCache(path.join(__dirname, 'public')))
+app.use(staticCache(config.staticDir))
 
-app.listen(8000, () => {
+app.listen(config.listen, () => {
     console.log('server is running')
 })
