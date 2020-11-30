@@ -2,7 +2,6 @@ const Router = require('koa-router')
 const router = new Router()
 
 router.post('/reg', async ctx => {
-    console.log(ctx.request.fields)
     const { email, password } = ctx.request.fields
     if (email == '' || password == '') {
         ctx.throw(400, '用户名或密码为空')

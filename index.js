@@ -1,20 +1,23 @@
 const staticCache = require('koa-static-cache')
-const path = require('path')
 const Koa = require('koa')
-// const bodyParser = require('koa-bodyparser')
 const convert = require('koa-convert')
 const views = require('koa-views')
 const registerRouter = require('./router')
 const app = new Koa()
 const body = require('koa-better-body')
-const config = require('./lib/config')
+const config = require('./config')
+const errorHandle = require('./libs/error')
 
 app.use(convert(body({
     uploadDir: config.uploadDir
 })))
 
+let db = require('./libs/db')
+
+errorHandle(app)
+
 app.use(async (ctx, next) => {
-    console.log(ctx.request.fields)
+    ctx.db = db
     await next()
 })
 const render = views(config.templateDir, { map: { html: 'ejs' } })
@@ -25,6 +28,6 @@ app.use(registerRouter())
 
 app.use(staticCache(config.staticDir))
 
-app.listen(config.listen, () => {
+app.listen(config.port, () => {
     console.log('server is running')
 })
