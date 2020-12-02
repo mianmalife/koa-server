@@ -4,10 +4,9 @@ module.exports = server => {
 
 async function err_handle(ctx, next) {
     try {
-        console.log(ctx)
         await next()
     } catch (error) {
-        console.log(error, '错了')
-        ctx.body = error
+        console.log(error)
+        ctx.body = { code: error.code, msg: error.msg }
     }
 }

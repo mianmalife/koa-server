@@ -5,6 +5,7 @@ module.exports = {
     staticDir: path.resolve('public'),
     templateDir: path.resolve('view'),
     uploadDir: path.resolve('public/upload'),
+    logDir: path.resolve('log/access.log'),
     // database
     db_host: 'localhost',
     db_port: 3306,
