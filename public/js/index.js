@@ -1,4 +1,5 @@
 $(function(){
+    console.log(document.cookie)
     $('#login').click(function(event){
         event.preventDefault()
         var email = $('#email').val()
