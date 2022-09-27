@@ -1,13 +1,19 @@
-const Router = require('koa-router')
-const router = new Router()
+const Router = require("koa-router");
+const router = new Router();
+const { userInfo } = require("../libs/db");
 
-router.get('/', async ctx => {
-    const res = await ctx.db.execute('SELECT * FROM tm_admin')
-    console.log(res)
-    await ctx.render('index', { title: 'koa'})
-})
-router.get('/user/:id', ctx => {
-    ctx.body = `Welcome ${ctx.params.id}`
-})
+router.get("/", async (ctx) => {
+  const users = await userInfo.findAll();
+  console.log(JSON.stringify(users, null, 2), "111");
+  const stringify = JSON.stringify(users, null, 2);
+  console.log(JSON.parse(stringify));
+  const parse = JSON.parse(stringify);
 
-module.exports = router
+  await ctx.render("index", { title: parse[1].firstName });
+});
+router.get("/user/:id", (ctx) => {
+  console.log(ctx.db);
+  ctx.body = `Welcome ${ctx.params.id}`;
+});
+
+module.exports = router;

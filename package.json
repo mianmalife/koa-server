@@ -2,8 +2,9 @@
   "name": "koa-server-net",
   "version": "1.0.0",
   "description": "a koa server",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "serve": "node ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,6 +35,7 @@
     "koa-static": "^5.0.0",
     "koa-static-cache": "^5.1.4",
     "koa-views": "^6.3.1",
-    "mysql-pro": "^1.0.1"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.23.1"
   }
 }
